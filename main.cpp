@@ -3,6 +3,6 @@
 
 int main() {
   std::println("Hello world!");
-  helloFromCpu();
+  NES::CPU cpu{};
   return 0;
 }

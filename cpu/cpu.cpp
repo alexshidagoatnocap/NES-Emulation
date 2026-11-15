@@ -1,4 +1,5 @@
 #include "cpu.hpp"
+
 #include <print>
 
 void helloFromCpu() { std::println("Hello from cpu!"); }
@@ -7,17 +8,17 @@ namespace NES {
 
 void CPU::lda(Byte byteToLoad) {
   registers.A = byteToLoad;
-  checkAndSetNegativeAndZeroFlag(byteToLoad);
+  helpers.checkAndSetNegativeAndZeroFlag(registers, byteToLoad);
 }
 
 void CPU::ldx(Byte byteToLoad) {
   registers.X = byteToLoad;
-  checkAndSetNegativeAndZeroFlag(byteToLoad);
+  helpers.checkAndSetNegativeAndZeroFlag(registers, byteToLoad);
 }
 
 void CPU::ldy(Byte byteToLoad) {
   registers.Y = byteToLoad;
-  checkAndSetNegativeAndZeroFlag(byteToLoad);
+  helpers.checkAndSetNegativeAndZeroFlag(registers, byteToLoad);
 }
 
 Byte CPU::sta(Byte byteToLoad) { return registers.A; }
