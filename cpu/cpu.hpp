@@ -9,6 +9,14 @@ namespace NES {
 
 class CPU {
 public:
+  void lda(Byte byteToLoad);
+  void ldx(Byte byteToLoad);
+  void ldy(Byte byteToLoad);
+  Byte sta(Byte byteToLoad);
+  Byte stx(Byte byteToLoad);
+  Byte sty(Byte byteToLoad);
+
+private:
   struct Registers {
     Word PC;
     Byte SP;
@@ -20,14 +28,6 @@ public:
 
   Registers registers{};
 
-  void lda(Byte byteToLoad) {
-    registers.A = byteToLoad;
-
-    if (checkIfZero(registers.A)) {
-    }
-  }
-
-private:
   enum StatusFlags {
     CARRY = 0,
     ZERO = 1,
@@ -38,20 +38,36 @@ private:
     NEGATIVE = 7
   };
 
-  bool checkIfNegative(Byte b) {
+  inline bool checkByteIfNegative(Byte b) {
     if (b >> StatusFlags::NEGATIVE)
       return true;
 
     return false;
   }
 
-  bool checkIfZero(Byte b) {
+  inline bool checkByteIfZero(Byte b) {
     bool flag = (b & StatusFlags::ZERO) >> StatusFlags::ZERO;
 
     if (flag)
       return true;
 
     return false;
+  }
+
+  inline void setFlag(StatusFlags flag) { registers.P |= (1 << flag); }
+
+  inline void resetFlag(StatusFlags flag) { registers.P &= ~(1 << flag); }
+
+  inline void checkAndSetNegativeAndZeroFlag(Byte b) {
+    if (checkByteIfNegative(b))
+      setFlag(StatusFlags::NEGATIVE);
+    else
+      resetFlag(StatusFlags::NEGATIVE);
+
+    if (checkByteIfZero(b))
+      setFlag(StatusFlags::ZERO);
+    else
+      resetFlag(StatusFlags::ZERO);
   }
 };
 
