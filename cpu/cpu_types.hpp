@@ -1,6 +1,6 @@
 #pragma once
 
-#include "type-aliases.hpp"
+#include "type_aliases.hpp"
 
 namespace NES {
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "cpu_types.hpp"
-#include "type-aliases.hpp"
 
 namespace NES {
 

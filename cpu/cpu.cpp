@@ -21,10 +21,10 @@ void CPU::ldy(Byte byteToLoad) {
   helpers.checkAndSetNegativeAndZeroFlag(registers, byteToLoad);
 }
 
-Byte CPU::sta(Byte byteToLoad) { return registers.A; }
+Byte CPU::sta(Byte address) { return registers.A; }
 
-Byte CPU::stx(Byte byteToLoad) { return registers.X; }
+Byte CPU::stx(Byte address) { return registers.X; }
 
-Byte CPU::sty(Byte byteToLoad) { return registers.Y; }
+Byte CPU::sty(Byte address) { return registers.Y; }
 
 } // namespace NES
